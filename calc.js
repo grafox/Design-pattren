@@ -1,5 +1,3 @@
-const calc = () => {
-    return 4 * 3
-}
+const calc = () => 2 * 4
 
 export default calc;

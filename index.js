@@ -1,14 +1,23 @@
-import express from 'express';
-import calc from './calc';
+class TrafficTower {
+    constructor() {
+        this.airplanes = [];
+    }
 
-const aNumber = calc();
-const app = express();
-const PORT = 3000;
+    requestPositions() {
+        return this.airplanes.map(airplane => {
+            return airplane.position;
+        });
+    }
+}
 
-app.get('/', (req, res) =>
-    res.send(`Showing number ${aNumber} on port ${PORT}`)
-);
+class Airplane{
+    constructor(position, trafficTower) {
+        this.position = position;
+        this.trafficTower = trafficTower;
+        this.trafficTower.airplanes.push(this);
+    }
 
-app.listen(PORT, () =>
-    console.log(`your server is running on port ${PORT}`)
-);
+    requestPositions() {
+        return this.trafficTower.requestPositions();
+    }
+}
